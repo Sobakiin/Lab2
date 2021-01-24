@@ -14,6 +14,10 @@ function clearMovies() {
 
 // This function is executed when the user clicks [ADD MOVIE] button.
 function addMovie() {
+    if(inp.value==""){
+        alert("Please enter a movie name")
+    }
+    else{
     // Step 1: Get value of input
     var userTypedText = inp.value;
     // Step 2: Create an empty <li></li>
@@ -31,4 +35,5 @@ function addMovie() {
 
     // Step 6: Call the clearInput function to clear the input field
     clearInput();
+    }
 }
