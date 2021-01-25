@@ -19,22 +19,27 @@ let addMovie = () => {
     let inp = document.querySelector("input");
     let myMovieList = document.querySelector("ul");
 
-    if(inp.value==""){
+    if(inp.value===""){
         alert("Please enter a movie name")
     }
     else{
         // Step 1: Get value of input
+        inp = document.querySelector("input");
         let userTypedText = inp.value;
         let exist = false
-        let listItems = myMovieList.children
-        for(let i=0; i<listItems.length;i++){
-            if(listItems[i].innerHTML===(userTypedText)){
-                console.log("Ding")
+        let listItem1 = myMovieList.children
+        for(let i=0; i<listItem1.length;i++){
+            let substr1 = listItem1[i].innerHTML
+            console.log(substr1)
+            console.log(userTypedText)
+            console.log(String(substr1.toLocaleLowerCase())===String(userTypedText.toLocaleLowerCase()))
+            if(String(substr1.toLocaleLowerCase())===String(userTypedText.toLocaleLowerCase())){
                 exist=true
+                
             }
         }
 
-        if(exist==false){
+        if(exist===false){
             // Step 2: Create an empty <li></li>
             let li = document.createElement("li"); // <li></li>
 
@@ -60,7 +65,7 @@ let addHistory = () => {
     let myMovieList = document.querySelector("ul");
     let movieHist = document.querySelector("#movieHistoryCard");
     let userTypedText = inp.value;
-    let textToInsert = document.createTextNode(userTypedText)
+    //let textToInsert = document.createTextNode(userTypedText)
     
     //I realize now I could let the relevant nodes be arguments in this function,
     //Will change that later.
@@ -71,6 +76,7 @@ let addHistory = () => {
        
         histList.classList.add("list-group")
 
+        let textToInsert = document.createTextNode(`${userTypedText} ${1}`)
         movie.appendChild(textToInsert);
         histList.appendChild(movie)
         movieHist.appendChild(histList);
@@ -78,17 +84,24 @@ let addHistory = () => {
     else{
         let presence = false
         let histList = movieHist.querySelector("ul")
-        let listItems = histList.children
-        for(let i = 0; i < listItems.length; i++){
+        let listItems2 = histList.children
+        for(let i = 0; i < listItems2.length; i++){
+            let substr2 =listItems2[i].innerHTML.split(" ")
             
-            if(listItems[i].innerHTML===(userTypedText)){
+            let entryCount = parseInt(substr2.pop())
+            substr2=substr2.join(" ")
+    
+            if(String(substr2).toLocaleLowerCase()==userTypedText.toLocaleLowerCase()){
                 //Some code that adds to the count section
+                
+                entryCount++
+                listItems2[i].innerHTML=`${substr2} ${entryCount}`
                 presence=true
             }
         }
         if(presence==false){
             let movie = document.createElement("il");
-            let textToInsert = document.createTextNode(userTypedText)
+            let textToInsert = document.createTextNode(`${userTypedText} ${1}`)
             movie.appendChild(textToInsert);
             histList.appendChild(movie)
         }
