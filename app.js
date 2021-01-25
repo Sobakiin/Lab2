@@ -12,6 +12,8 @@ let clearMovies = () => {
     myMovieList.innerHTML = '';
 }
 
+
+
 // This function is executed when the user clicks [ADD MOVIE] button.
 let addMovie = () => {
     let inp = document.querySelector("input");
@@ -39,4 +41,8 @@ let addMovie = () => {
         // Step 6: Call the clearInput function to clear the input field
         clearInput();
     }
+}
+
+let addHistory = () => {
+    // This function is executed in the previous function to add the movie to the history list.
 }
