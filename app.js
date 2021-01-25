@@ -35,11 +35,10 @@ let addMovie = () => {
         // <li>Harry Potter </li>
         li.appendChild(textToInsert);
 
-        addHistory()
         // Step 5: Insert the <li>Harry Potter</li> INTO the <ul>
         myMovieList.appendChild(li);
-
-        // Step 6: Call the clearInput function to clear the input field
+        addHistory()
+       // Step 6: Call the clearInput function to clear the input field
         clearInput();
     }
 }
@@ -48,19 +47,25 @@ let addHistory = () => {
     // This function is executed in the previous function to add the movie to the history list.
     let inp = document.querySelector("input");
     let myMovieList = document.querySelector("ul");
-    let movieHist = document.querySelector("#movieHistoryCard")//.querySelectorAll("li");
+    let movieHist = document.querySelector("#movieHistoryCard");
     let userTypedText = inp.value;
-    let textToInsert = document.createTextNode(userTypedText)
+    
     //I realize now I could let the relevant nodes be arguments in this function,
     //Will change that later.
 
-    if(movieHist == null){
-    let movie = document.createElement("il");
-    movie.appendChild(textToInsert);
-    movieHist.appendChild(movie);
+    if(movieHist.querySelector("ul") == null){
+        let movie = document.createElement("il");
+        let histList = document.createElement("ul")
+        let textToInsert = document.createTextNode(userTypedText)
+        histList.classList.add("list-group")
+
+        movie.appendChild(textToInsert);
+        histList.appendChild(movie)
+        movieHist.appendChild(histList);
     }
     else{
         let presence = false
+        let histList = movieHist.querySelector("ul")
         for(let i = 0; i < movieHist.length; i++){
             
             if(movieHist[i].contains(textToInsert)){
@@ -70,8 +75,9 @@ let addHistory = () => {
         }
         if(presence==false){
             let movie = document.createElement("il");
+            let textToInsert = document.createTextNode(userTypedText)
             movie.appendChild(textToInsert);
-            movieHist.appendChild(movie)
+            histList.appendChild(movie)
         }
     }
 }
