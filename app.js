@@ -25,18 +25,29 @@ let addMovie = () => {
     else{
         // Step 1: Get value of input
         let userTypedText = inp.value;
-        // Step 2: Create an empty <li></li>
-        let li = document.createElement("li"); // <li></li>
+        let exist = false
+        let listItems = myMovieList.children
+        for(let i=0; i<listItems.length;i++){
+            if(listItems[i].innerHTML===(userTypedText)){
+                console.log("Ding")
+                exist=true
+            }
+        }
 
-        // Step 3: Prepare the text we will insert INTO that li ^...example: Harry Potter
-        let textToInsert = document.createTextNode(userTypedText);
+        if(exist==false){
+            // Step 2: Create an empty <li></li>
+            let li = document.createElement("li"); // <li></li>
 
-        // Step 4: Insert text into li
-        // <li>Harry Potter </li>
-        li.appendChild(textToInsert);
+            // Step 3: Prepare the text we will insert INTO that li ^...example: Harry Potter
+            let textToInsert = document.createTextNode(userTypedText);
 
-        // Step 5: Insert the <li>Harry Potter</li> INTO the <ul>
-        myMovieList.appendChild(li);
+            // Step 4: Insert text into li
+            // <li>Harry Potter </li>
+            li.appendChild(textToInsert);
+            
+            // Step 5: Insert the <li>Harry Potter</li> INTO the <ul>
+            myMovieList.appendChild(li);
+        }
         addHistory()
        // Step 6: Call the clearInput function to clear the input field
         clearInput();
@@ -49,14 +60,15 @@ let addHistory = () => {
     let myMovieList = document.querySelector("ul");
     let movieHist = document.querySelector("#movieHistoryCard");
     let userTypedText = inp.value;
+    let textToInsert = document.createTextNode(userTypedText)
     
     //I realize now I could let the relevant nodes be arguments in this function,
     //Will change that later.
 
-    if(movieHist.querySelector("ul") == null){
+    if(movieHist.querySelector("ul") === null){
         let movie = document.createElement("il");
         let histList = document.createElement("ul")
-        let textToInsert = document.createTextNode(userTypedText)
+       
         histList.classList.add("list-group")
 
         movie.appendChild(textToInsert);
@@ -66,9 +78,10 @@ let addHistory = () => {
     else{
         let presence = false
         let histList = movieHist.querySelector("ul")
-        for(let i = 0; i < movieHist.length; i++){
+        let listItems = histList.children
+        for(let i = 0; i < listItems.length; i++){
             
-            if(movieHist[i].contains(textToInsert)){
+            if(listItems[i].innerHTML===(userTypedText)){
                 //Some code that adds to the count section
                 presence=true
             }
