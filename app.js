@@ -94,3 +94,24 @@ let addHistory = () => {
         }
     }
 }
+
+let filterList = () =>{
+    let filtBox = document.querySelector("#filter").value
+    let myMovieList = document.querySelector("ul").children;
+    if(myMovieList!==null){
+        if(filtBox!==""){
+            for(let i=0;i<myMovieList.length;i++){
+                if(myMovieList[i].innerHTML.includes(filtBox)){
+                    myMovieList[i].style.visibility="visible"
+                }
+                else{
+                    myMovieList[i].style.visibility="hidden"
+                }
+
+            }
+        }
+    }
+
+}
+
+document.querySelector("#filter").addEventListener("input",filterList)
