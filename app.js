@@ -30,9 +30,7 @@ let addMovie = () => {
         let listItem1 = myMovieList.children
         for(let i=0; i<listItem1.length;i++){
             let substr1 = listItem1[i].innerHTML
-            console.log(substr1)
-            console.log(userTypedText)
-            console.log(String(substr1.toLocaleLowerCase())===String(userTypedText.toLocaleLowerCase()))
+           
             if(String(substr1.toLocaleLowerCase())===String(userTypedText.toLocaleLowerCase())){
                 exist=true
                 
